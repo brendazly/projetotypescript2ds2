@@ -1,28 +1,36 @@
-namespace empresa{
+namespace empresa {
     
-    export class Produto{
-        private _nome:string;
-        private _preco:number;
-        private _imp:number;
+    export class Produto {
+        private _nome: string;
+        private _preco: number;
+        private _imp: number;
 
-        get nome(){
+        get nome() {
             return this._nome;
         }
 
-        set nome(nome:string){
-            this._nome=nome;
+        set nome(nome: string) {
+            this._nome = nome;
         }
 
-        get preco(){
+        get preco() {
             return this._preco;
         }
 
-        set (preco:number){
+        set preco(preco: number) {
             this._preco = preco;
         }
 
-        public calcularImposto(imp:number){
-            return this.preco + this._imp;
+        get imp() {
+            return this._imp;
+        }
+
+        set imp(imp: number) {
+            this._imp = imp;
+        }
+
+        public calcularImposto(): number {
+            return (this.preco * this.imp) / 100; 
         }
     }
 }
