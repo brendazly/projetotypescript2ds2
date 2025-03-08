@@ -3,35 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastro de produtos</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Cadastro de produtos</h1>
     <div class="container">
+        <h1>Cadastro de produtos</h1>
         <div class="row">
             <div class="col-12">
-                <label for="">Nome do produto: </label>
-                <input type="text" class="form-control" id="campoNome">
+                <div class="mb-3">
+                    <label for="campoNome">Nome do produto:</label>
+                    <input type="text" class="form-control" id="campoNome">
+                </div>
 
-                <label for="">Preço do produto($): </label>
-                <input type="number" class="form-control" id="campoPreco">
+                <div class="mb-3">
+                    <label for="campoPreco">Preço do produto ($):</label>
+                    <input type="number" class="form-control" id="campoPreco">
+                </div>
 
-                <label for="">imposto(%): </label>
-                <input type="number" class="form-control" id="campoImp">
+                <div class="mb-3">
+                    <label for="campoImp">Imposto (%):</label>
+                    <input type="number" class="form-control" id="campoImp">
+                </div>
 
-                <button class="btn btn-primary mt-3" id="cad">Cadastrar produto </button>
+                <button class="btn btn-primary mt-3" id="cad">Cadastrar produto</button>
 
-                <h1>Nome: <span id="nome"> </span></h1>
-                <h2>Preço: <span id="preco"> </span></h2>
-                <h2>Imposto: <span id="imp"> </span></h2>
+                <div class="mt-4">
+                    <h1>Nome: <span id="nome"> </span></h1>
+                    <h2>Preço: <span id="preco"> </span></h2>
+                    <h2>Imposto: <span id="imp"> </span></h2>
+                    <h2>Preço Final: <span id="precinho"></span></h2>
+                    <!-- <h2>Preço final: <span id="pf"> </span></h2> -->
+                </div>
             </div>
         </div>
     </div>
-
     
-
-    <script src="./js/cadastro.js"></script>
+    <script src="./js/produto.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>

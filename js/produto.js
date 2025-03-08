@@ -1,42 +1,31 @@
+"use strict";
 var empresa;
 (function (empresa) {
-    var Produto = /** @class */ (function () {
-        function Produto() {
+    class Produto {
+        get nome() {
+            return this._nome;
         }
-        Object.defineProperty(Produto.prototype, "nome", {
-            get: function () {
-                return this._nome;
-            },
-            set: function (nome) {
-                this._nome = nome;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(Produto.prototype, "preco", {
-            get: function () {
-                return this._preco;
-            },
-            set: function (preco) {
-                this._preco = preco;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(Produto.prototype, "imp", {
-            get: function () {
-                return this._imp;
-            },
-            set: function (imp) {
-                this._imp = imp;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Produto.prototype.calcularImposto = function () {
+        set nome(nome) {
+            this._nome = nome;
+        }
+        get preco() {
+            return this._preco;
+        }
+        set preco(preco) {
+            this._preco = preco;
+        }
+        get imp() {
+            return this._imp;
+        }
+        set imp(imp) {
+            this._imp = imp;
+        }
+        calcularImposto() {
             return (this.preco * this.imp) / 100;
-        };
-        return Produto;
-    }());
+        }
+        resultadoFinal() {
+            return (this.preco + this.calcularImposto());
+        }
+    }
     empresa.Produto = Produto;
 })(empresa || (empresa = {}));

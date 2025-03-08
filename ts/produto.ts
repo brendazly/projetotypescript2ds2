@@ -32,5 +32,10 @@ namespace empresa {
         public calcularImposto(): number {
             return (this.preco * this.imp) / 100; 
         }
+
+        public resultadoFinal(): number {
+            return (this.preco + this.calcularImposto());
+
+        }
     }
 }
