@@ -3,43 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de produtos</title>
+    <title>Document</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>Cadastro de produtos</h1>
         <div class="row">
             <div class="col-12">
-                <div class="mb-3">
-                    <label for="campoNome">Nome do produto:</label>
-                    <input type="text" class="form-control" id="campoNome">
-                </div>
+                <label for="">  Código: </label>
+                <input type="text" class="form-control" id="campoCodigo">
 
-                <div class="mb-3">
-                    <label for="campoPreco">Preço do produto ($):</label>
-                    <input type="number" class="form-control" id="campoPreco">
-                </div>
+                <label for="">  Nome: </label>
+                <input type="text" class="form-control" id="campoNome">
 
-                <div class="mb-3">
-                    <label for="campoImp">Imposto (%):</label>
-                    <input type="number" class="form-control" id="campoImp">
-                </div>
+                <label for="">Ano Nascimento: </label>
+                <input type="number" class="form-control" id="campoAno">
 
-                <button class="btn btn-primary mt-3" id="cad">Cadastrar produto</button>
+                <button class="btn btn-primary mt-3" id="calc">Calcular</button>
 
-                <div class="mt-4">
-                    <h1>Nome: <span id="nome"> </span></h1>
-                    <h2>Preço: <span id="preco"> </span></h2>
-                    <h2>Imposto: <span id="imp"> </span></h2>
-                    <h2>Preço Final: <span id="precinho"></span></h2>
-                    <!-- <h2>Preço final: <span id="pf"> </span></h2> -->
+                <h1>Nome: <span id="nome"> </span></h1>
+                <h2>Idade: <span id="idade"> </span></h2>
+                <h2>Ano: <span id="ano"> </span></h2>
+                <h2>Saldo: <span id="saldo"> </span></h2>
+                <h2>Codigo: <span id="codigo"> </span></h2>
+
+                <div class="row">
+                    <div class="col-6">
+                        <hr>
+                        <h3> Depositar </h3>
+                        <label for=""> Depósito: </label>
+                        <input type="number" class="form-control" id="campoDeposito">
+                        <button class="btn btn-primary mt-3" id="Deposito">Depositar</button>
+                    </div>
+                    <div class="col-6">
+                        <hr>
+                        <h3> Comprar </h3>
+                        <label for=""> Valor da compra: </label>
+                        <input type="number" class="form-control" id="campoCompra">
+                        <button class="btn btn-primary mt-3" id="Comprar">Comprar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     
-    <script src="./js/produto.js"></script>
+
+    <script src="./js/pessoa.js"></script>
     <script src="./js/main.js"></script>
+    <script src="./js/cliente.js"></script>
 </body>
 </html>

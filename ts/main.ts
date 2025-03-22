@@ -1,45 +1,50 @@
 namespace empresa {
 
-    const cad = document.getElementById("cad") as HTMLButtonElement;
+    const calc = document.getElementById("calc") as HTMLButtonElement;
     const campoNome = document.getElementById("campoNome") as HTMLInputElement;
-    const campoPreco = document.getElementById("campoPreco") as HTMLInputElement;
-    const campoImp = document.getElementById("campoImp") as HTMLInputElement;
+    const campoAno = document.getElementById("campoAno") as HTMLInputElement;
+    const campoSaldo = document.getElementById("saldo") as HTMLInputElement;
 
-    /*class Produto {
-        nome: string;
-        preco: number;
-        imp: number;
-        impostoCalculado: number;
+    const campoCodigo = document.getElementById("campoCodigo") as HTMLInputElement;
+    const campoDeposito = document.getElementById("campoDeposito") as HTMLInputElement;
+    const campoCompra = document.getElementById("campoCompra") as HTMLInputElement;
 
-        constructor() {
-            this.nome = "";
-            this.preco = 0;
-            this.imp = 0;
-            this.impostoCalculado = 0;
-        }
+    const btnComprar = document.getElementById("Comprar") as HTMLInputElement;
+    const btnDeposito = document.getElementById("Deposito") as HTMLInputElement;
 
-        calcularImposto(): number {
-            this.impostoCalculado = (this.preco * this.imp) / 100;
-            return this.impostoCalculado;
-        }
+    let p: Cliente;
 
-        resultadoFinal(): number {
-            return this.preco + this.impostoCalculado;
-        }*
-        
-    }*/
-
-    
-
-    cad.addEventListener("click", () => {
-        let p = new Produto();
+    calc.addEventListener("click", ()=>{
+        p = new Cliente(parseInt(campoCodigo.value));
         p.nome = campoNome.value;
-        p.preco = parseFloat(campoPreco.value); 
-        p.imp = parseFloat(campoImp.value); 
+        p.anoNasc = parseInt(campoAno.value);
+        // p.codigo = 90
+        p.deposita(200);
+        p.deposita(200);
 
-        document.getElementById("nome")!.textContent = p.nome;
-        document.getElementById("preco")!.textContent = p.preco.toString();
-        document.getElementById("imp")!.textContent = p.calcularImposto().toString();
-        document.getElementById("precinho")!.textContent = p.resultadoFinal().toString();
+
+
+        document.getElementById("nome").textContent = p.nome;
+        document.getElementById("ano").textContent = p.anoNasc.toString();
+        document.getElementById("idade").textContent = p.calcularIdade(2025).toString();
+        document.getElementById("codigo").textContent = p.codigo.toString()
+        document.getElementById("saldo").textContent = p.saldo.toString()
     });
+
+    btnDeposito.addEventListener("click", ()=>{
+        p.deposita(parseFloat(campoDeposito.value));
+        document.getElementById("saldo").textContent = p.saldo.toString();
+    })
+    btnComprar.addEventListener("click", ()=>{
+        
+        if (p.comprar(parseFloat(campoCompra.value))) {
+            document.getElementById("saldo").textContent = p.saldo.toString();
+            alert("Obrigada pela compra :D");
+        }
+        else {
+            alert("Saldo insuficiente, faça um deposito!")
+        }
+
+        // document.getElementById("saldo").textContent = p.saldo.toString();
+    })
 }

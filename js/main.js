@@ -1,41 +1,41 @@
 "use strict";
 var empresa;
 (function (empresa) {
-    const cad = document.getElementById("cad");
+    const calc = document.getElementById("calc");
     const campoNome = document.getElementById("campoNome");
-    const campoPreco = document.getElementById("campoPreco");
-    const campoImp = document.getElementById("campoImp");
-    /*class Produto {
-        nome: string;
-        preco: number;
-        imp: number;
-        impostoCalculado: number;
-
-        constructor() {
-            this.nome = "";
-            this.preco = 0;
-            this.imp = 0;
-            this.impostoCalculado = 0;
-        }
-
-        calcularImposto(): number {
-            this.impostoCalculado = (this.preco * this.imp) / 100;
-            return this.impostoCalculado;
-        }
-
-        resultadoFinal(): number {
-            return this.preco + this.impostoCalculado;
-        }*
-        
-    }*/
-    cad.addEventListener("click", () => {
-        let p = new empresa.Produto();
+    const campoAno = document.getElementById("campoAno");
+    const campoSaldo = document.getElementById("saldo");
+    const campoCodigo = document.getElementById("campoCodigo");
+    const campoDeposito = document.getElementById("campoDeposito");
+    const campoCompra = document.getElementById("campoCompra");
+    const btnComprar = document.getElementById("Comprar");
+    const btnDeposito = document.getElementById("Deposito");
+    let p;
+    calc.addEventListener("click", () => {
+        p = new empresa.Cliente(parseInt(campoCodigo.value));
         p.nome = campoNome.value;
-        p.preco = parseFloat(campoPreco.value);
-        p.imp = parseFloat(campoImp.value);
+        p.anoNasc = parseInt(campoAno.value);
+        // p.codigo = 90
+        p.deposita(200);
+        p.deposita(200);
         document.getElementById("nome").textContent = p.nome;
-        document.getElementById("preco").textContent = p.preco.toString();
-        document.getElementById("imp").textContent = p.calcularImposto().toString();
-        document.getElementById("precinho").textContent = p.resultadoFinal().toString();
+        document.getElementById("ano").textContent = p.anoNasc.toString();
+        document.getElementById("idade").textContent = p.calcularIdade(2025).toString();
+        document.getElementById("codigo").textContent = p.codigo.toString();
+        document.getElementById("saldo").textContent = p.saldo.toString();
+    });
+    btnDeposito.addEventListener("click", () => {
+        p.deposita(parseFloat(campoDeposito.value));
+        document.getElementById("saldo").textContent = p.saldo.toString();
+    });
+    btnComprar.addEventListener("click", () => {
+        if (p.comprar(parseFloat(campoCompra.value))) {
+            document.getElementById("saldo").textContent = p.saldo.toString();
+            alert("Obrigada pela compra :D");
+        }
+        else {
+            alert("Saldo insuficiente, faça um deposito!");
+        }
+        // document.getElementById("saldo").textContent = p.saldo.toString();
     });
 })(empresa || (empresa = {}));
