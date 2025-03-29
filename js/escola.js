@@ -1,7 +1,8 @@
 "use strict";
 var escola;
-(function (escola_1) {
-    const btnCalcular = document.getElementById("btnCalcularMedia");
+(function (escola) {
+    // Definindo os elementos do formulário
+    const btnCalcularMedia = document.getElementById("btnCalcularMedia");
     const btnCadastrar = document.getElementById("btnCadastrar");
     const campoNome = document.getElementById("campoNome");
     const campoAno = document.getElementById("campoAno");
@@ -16,42 +17,23 @@ var escola;
     const campoNota3 = document.getElementById("campoNota3");
     const campoNota4 = document.getElementById("campoNota4");
     let aluno;
-    class Aluno {
-        constructor(nome, anoNasc, cpf, endereco, telefone, numMatricula, curso, escola) {
-            this.notas = [];
-            this.nome = nome;
-            this.anoNasc = anoNasc;
-            this.cpf = cpf;
-            this.endereco = endereco;
-            this.telefone = telefone;
-            this.numMatricula = numMatricula;
-            this.curso = curso;
-            this.escola = escola;
-        }
-        calcularMedia() {
-            return this.notas.reduce((a, b) => a + b, 0) / this.notas.length;
-        }
-        adicionarNota(nota) {
-            this.notas.push(nota);
-        }
-    }
+    // Evento para cadastrar o aluno
     btnCadastrar.addEventListener("click", () => {
-        aluno = new Aluno(campoNome.value, parseInt(campoAno.value), campoCpf.value, campoEndereco.value, campoTelefone.value, parseInt(campoMatricula.value), campoCurso.value, campoEscola.value);
+        aluno = new escola.Aluno(campoNome.value, parseInt(campoAno.value), campoCpf.value, campoEndereco.value, campoTelefone.value, parseInt(campoMatricula.value), campoCurso.value, campoEscola.value, parseFloat(campoNota1.value), parseFloat(campoNota2.value), parseFloat(campoNota3.value), parseFloat(campoNota4.value));
         // Exibindo as informações do aluno no DOM
         document.getElementById("nomeAluno").textContent = aluno.nome;
-        document.getElementById("idadeAluno").textContent = aluno.anoNasc.toString();
-        document.getElementById("matriculaAluno").textContent = aluno.numMatricula.toString();
+        document.getElementById("idadeAluno").textContent = aluno.calcularIdade(2025).toString(); // A idade é calculada aqui
+        document.getElementById("matriculaAluno").textContent = aluno.matricula.toString();
         document.getElementById("cursoAluno").textContent = aluno.curso;
         document.getElementById("escolaAluno").textContent = aluno.escola;
+        // Inicializa a exibição de média
+        document.getElementById("mediaAluno").textContent = "N/A";
     });
     // Evento para calcular a média das notas
-    btnCalcular.addEventListener("click", () => {
+    btnCalcularMedia.addEventListener("click", () => {
         if (aluno) {
             const media = aluno.calcularMedia();
-            document.getElementById("media").textContent = `A média das notas é: ${media.toFixed(2)}`;
-        }
-        else {
-            alert("Por favor, cadastre o aluno antes de calcular a média.");
+            document.getElementById("mediaAluno").textContent = media.toString();
         }
     });
 })(escola || (escola = {}));

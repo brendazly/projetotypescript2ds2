@@ -1,50 +1,81 @@
-namespace empresa {
+namespace escola {
 
-    const calc = document.getElementById("calc") as HTMLButtonElement;
+    const btnCalcular = document.getElementById("btnCalcularMedia") as HTMLButtonElement;
+    const btnCadastrar = document.getElementById("btnCadastrar") as HTMLButtonElement;
     const campoNome = document.getElementById("campoNome") as HTMLInputElement;
     const campoAno = document.getElementById("campoAno") as HTMLInputElement;
-    const campoSaldo = document.getElementById("saldo") as HTMLInputElement;
+    const campoCpf = document.getElementById("campoCpf") as HTMLInputElement;
+    const campoEndereco = document.getElementById("campoEndereco") as HTMLInputElement;
+    const campoTelefone = document.getElementById("campoTelefone") as HTMLInputElement;
+    const campoMatricula = document.getElementById("campoMatricula") as HTMLInputElement;
+    const campoCurso = document.getElementById("campoCurso") as HTMLInputElement;
+    const campoEscola = document.getElementById("campoEscola") as HTMLInputElement;
+    const campoNota1 = document.getElementById("campoNota1") as HTMLInputElement;
+    const campoNota2 = document.getElementById("campoNota2") as HTMLInputElement;
+    const campoNota3 = document.getElementById("campoNota3") as HTMLInputElement;
+    const campoNota4 = document.getElementById("campoNota4") as HTMLInputElement;
 
-    const campoCodigo = document.getElementById("campoCodigo") as HTMLInputElement;
-    const campoDeposito = document.getElementById("campoDeposito") as HTMLInputElement;
-    const campoCompra = document.getElementById("campoCompra") as HTMLInputElement;
+    let aluno: Aluno;
 
-    const btnComprar = document.getElementById("Comprar") as HTMLInputElement;
-    const btnDeposito = document.getElementById("Deposito") as HTMLInputElement;
+    class Aluno {
+        nome: string;
+        anoNasc: number;
+        cpf: string;
+        endereco: string;
+        telefone: string;
+        numMatricula: number;
+        curso: string;
+        escola: string;
+        notas: number[] = [];
 
-    let p: Cliente;
+        constructor(nome: string, anoNasc: number, cpf: string, endereco: string, telefone: string, numMatricula: number, curso: string, escola: string) {
+            this.nome = nome;
+            this.anoNasc = anoNasc;
+            this.cpf = cpf;
+            this.endereco = endereco;
+            this.telefone = telefone;
+            this.numMatricula = numMatricula;
+            this.curso = curso;
+            this.escola = escola;
+        }
 
-    calc.addEventListener("click", ()=>{
-        p = new Cliente(parseInt(campoCodigo.value));
-        p.nome = campoNome.value;
-        p.anoNasc = parseInt(campoAno.value);
-        // p.codigo = 90
-        p.deposita(200);
-        p.deposita(200);
+        calcularMedia(): number {
+            return this.notas.reduce((a, b) => a + b, 0) / this.notas.length;
+        }
 
+        adicionarNota(nota: number) {
+            this.notas.push(nota);
+        }
+    }
 
+    btnCadastrar.addEventListener("click", () => {
+        aluno = new Aluno(
+            campoNome.value,
+            parseInt(campoAno.value),
+            campoCpf.value,
+            campoEndereco.value,
+            campoTelefone.value,
+            parseInt(campoMatricula.value),
+            campoCurso.value,
+            campoEscola.value
+        );
 
-        document.getElementById("nome").textContent = p.nome;
-        document.getElementById("ano").textContent = p.anoNasc.toString();
-        document.getElementById("idade").textContent = p.calcularIdade(2025).toString();
-        document.getElementById("codigo").textContent = p.codigo.toString()
-        document.getElementById("saldo").textContent = p.saldo.toString()
+        // Exibindo as informações do aluno no DOM
+        document.getElementById("nomeAluno")!.textContent = aluno.nome;
+        document.getElementById("idadeAluno")!.textContent = aluno.anoNasc.toString();
+        document.getElementById("matriculaAluno")!.textContent = aluno.numMatricula.toString();
+        document.getElementById("cursoAluno")!.textContent = aluno.curso;
+        document.getElementById("escolaAluno")!.textContent = aluno.escola;
     });
 
-    btnDeposito.addEventListener("click", ()=>{
-        p.deposita(parseFloat(campoDeposito.value));
-        document.getElementById("saldo").textContent = p.saldo.toString();
-    })
-    btnComprar.addEventListener("click", ()=>{
-        
-        if (p.comprar(parseFloat(campoCompra.value))) {
-            document.getElementById("saldo").textContent = p.saldo.toString();
-            alert("Obrigada pela compra :D");
-        }
-        else {
-            alert("Saldo insuficiente, faça um deposito!")
-        }
-
-        // document.getElementById("saldo").textContent = p.saldo.toString();
-    })
+    // Evento para calcular a média das notas
+    
+btnCalcular.addEventListener("click", () => {
+    if (aluno) {
+        const media = aluno.calcularMedia();
+        document.getElementById("media")!.textContent = `A média das notas é: ${media.toFixed(2)}`;
+    } else {
+        alert("Por favor, cadastre o aluno antes de calcular a média.");
+    }
+    });
 }
